@@ -1,0 +1,8 @@
+# 홈페이지에 필요한 파일만 올린다. 나머지는 모두 막는다.
+# 재료.txt, 사진폴더(원본), 첫화면 GIF 원본, CLAUDE.md, .claude(작업 도구)는 올리지 않는다.
+*
+!.gitignore
+!index.html
+!style.css
+!images/
+!images/*
