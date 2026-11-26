@@ -1,0 +1,5 @@
+# 서경오피스 홈페이지: 모든 검색엔진과 AI가 읽어도 됩니다.
+User-agent: *
+Allow: /
+
+Sitemap: https://mapssi8272-rgb.github.io/skoffice-homepage/sitemap.xml

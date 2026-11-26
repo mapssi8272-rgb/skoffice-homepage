@@ -5,6 +5,9 @@
 !index.html
 !style.css
 !blog-posts.js
+!sitemap.xml
+!robots.txt
+!llms.txt
 !images/
 !images/*
 !images/blog/
