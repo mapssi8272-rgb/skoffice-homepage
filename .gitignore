@@ -4,5 +4,13 @@
 !.gitignore
 !index.html
 !style.css
+!blog-posts.js
 !images/
 !images/*
+!images/blog/
+!images/blog/*
+!scripts/
+!scripts/fetch-blog.mjs
+!.github/
+!.github/workflows/
+!.github/workflows/blog.yml

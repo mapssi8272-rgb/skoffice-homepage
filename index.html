@@ -138,19 +138,14 @@
     </div>
   </section>
 
-  <!-- 블로그 소식: 자리만 만들어 둠. 나중에 #blog-list 안에 글 목록을 넣는다 -->
+  <!-- 블로그 소식: blog-posts.js(scripts/fetch-blog.mjs가 만듦)의 최근 글 6개를 보여 준다 -->
   <section class="section section-alt" id="news" aria-labelledby="news-title">
     <div class="wrap">
       <h2 id="news-title">블로그 소식</h2>
-      <p class="section-lead">새 글이 올라오면 이곳에 보입니다.</p>
-      <ul class="slot-grid blog-list" id="blog-list" data-slot="blog" aria-label="블로그 글 목록 (준비 중)">
-        <li class="slot" aria-hidden="true"><span class="slot-bar slot-date"></span><span class="slot-bar"></span></li>
-        <li class="slot" aria-hidden="true"><span class="slot-bar slot-date"></span><span class="slot-bar"></span></li>
-        <li class="slot" aria-hidden="true"><span class="slot-bar slot-date"></span><span class="slot-bar"></span></li>
-      </ul>
-      <div class="slot-note">
-        <p>블로그를 연결하고 있어요.</p>
-      </div>
+      <p class="section-lead">네이버 블로그에 올린 최근 글입니다. 누르면 새 창에서 열려요.</p>
+      <ul class="posts" id="blog-list"></ul>
+      <p class="posts-empty" id="blog-empty" hidden>블로그 글을 불러오지 못했어요. 아래 단추로 블로그에서 직접 보세요.</p>
+      <a class="posts-more" id="blog-more" href="https://blog.naver.com/mapssi8274" target="_blank" rel="noopener">네이버 블로그 전체 보기</a>
     </div>
   </section>
 
@@ -239,6 +234,51 @@
 
 <div class="toast" role="status" aria-live="polite"></div>
 
+<script src="blog-posts.js"></script>
+<script>
+  /* 블로그 소식 그리기 */
+  (function () {
+    var list = document.getElementById('blog-list');
+    var data = window.BLOG_POSTS;
+    var posts = data && data.posts ? data.posts.slice(0, 6) : [];
+    if (!posts.length) { document.getElementById('blog-empty').hidden = false; return; }
+    if (data.blog && data.blog.url) document.getElementById('blog-more').href = data.blog.url;
+    posts.forEach(function (p) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.className = 'post';
+      a.href = p.link;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      var thumb = document.createElement('span');
+      thumb.className = 'post-thumb';
+      if (p.image) {
+        var img = document.createElement('img');
+        img.src = p.image;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.width = 400; img.height = 400;
+        thumb.appendChild(img);
+      }
+      var body = document.createElement('span');
+      body.className = 'post-body';
+      var title = document.createElement('span');
+      title.className = 'post-title';
+      title.textContent = p.title;
+      var date = document.createElement('time');
+      date.className = 'post-date';
+      date.dateTime = p.date.replace(/\./g, '-');
+      date.textContent = p.date;
+      body.appendChild(title);
+      body.appendChild(date);
+      a.appendChild(thumb);
+      a.appendChild(body);
+      a.setAttribute('aria-label', p.title + ', ' + p.date + ', 새 창에서 열림');
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  })();
+</script>
 <script>
   (function () {
     var toast = document.querySelector('.toast');

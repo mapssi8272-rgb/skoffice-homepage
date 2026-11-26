@@ -146,9 +146,27 @@ a { color: inherit; }
 }
 .slot-note p { margin: 0; color: var(--ink-soft); }
 .slot-note a { display: inline-flex; align-items: center; min-height: 44px; font-size: 20px; font-weight: 800; color: var(--blue); }
-.blog-list .slot { min-height: 0; flex-direction: row; align-items: center; gap: 14px; }
-.blog-list .slot-bar { flex: 1; }
-.blog-list .slot-date { width: 64px; flex: none; }
+/* ── 블로그 소식 ─────────────────────── */
+.posts { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.post {
+  display: flex; gap: 14px; align-items: center; height: 100%;
+  padding: 10px; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line);
+  text-decoration: none; color: var(--ink);
+}
+.post:hover .post-title { color: var(--blue); }
+.post-thumb { flex: none; width: 96px; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--paper-cool); }
+.post-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.post-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.post-title {
+  font-size: 16px; font-weight: 700; line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.post-date { font-size: 14px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.posts-empty { margin: 0; padding: 16px; border-radius: var(--radius); background: var(--paper); color: var(--ink-soft); }
+.posts-more {
+  display: inline-flex; align-items: center; min-height: 48px; margin-top: 18px; padding: 0 20px;
+  border-radius: 999px; background: #03c75a; color: #fff; font-weight: 800; text-decoration: none;
+}
 
 /* ── 자주 묻는 질문 ──────────────────── */
 .faq { border-top: 1px solid var(--line); }
@@ -222,7 +240,7 @@ a { color: inherit; }
   .photos { grid-template-columns: 1fr 1fr; }
   .photos figure:first-child { grid-column: 1 / -1; }
   .slot-grid { grid-template-columns: repeat(3, 1fr); }
-  .blog-list { grid-template-columns: 1fr; }
+  .posts { grid-template-columns: 1fr 1fr; }
   .hero-media { margin: 28px 0 0; border-radius: 18px; overflow: hidden; }
   .info { grid-template-columns: 1fr 1fr; }
 }
@@ -248,6 +266,10 @@ a { color: inherit; }
   .groups { grid-template-columns: repeat(4, 1fr); }
   .photos { grid-template-columns: repeat(3, 1fr); }
   .photos figure:first-child { grid-column: auto; }
+  .posts { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .post { flex-direction: column; align-items: stretch; gap: 12px; padding: 0 0 16px; overflow: hidden; }
+  .post-thumb { width: 100%; border-radius: 0; }
+  .post-body { padding: 0 16px; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
   .contact-grid .info { margin-top: 0; }
 }
